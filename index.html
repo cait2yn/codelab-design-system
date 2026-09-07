@@ -50,7 +50,16 @@ code,.mono{font-family:var(--font-mono);}
   position:sticky; top:0; z-index:20; background:var(--bg);
 }
 .brandmark{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; color:var(--text); white-space:nowrap;}
-.brandmark .mark{width:22px; height:22px; border-radius:5px; background:var(--red-500); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:12px; color:#fff; flex-shrink:0;}
+.brandmark .mark{width:16px; height:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.brandmark .mark svg{width:100%; height:100%; display:block;}
+.brandmark .mark .icon-light{display:none;}
+.brandmark .mark .icon-dark{display:block;}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]) .brandmark .mark .icon-light{display:block;}
+  :root:not([data-theme="dark"]) .brandmark .mark .icon-dark{display:none;}
+}
+:root[data-theme="light"] .brandmark .mark .icon-light{display:block;}
+:root[data-theme="light"] .brandmark .mark .icon-dark{display:none;}
 .search-btn{
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-6);
   border:1px solid var(--border); border-radius:var(--r-md); padding:7px 8px 7px 12px;
@@ -182,7 +191,10 @@ footer ul{list-style:none; margin:0; padding:0; font-size:13px; color:var(--text
 
 <div class="frame">
 <div class="topbar">
-  <div class="brandmark"><span class="mark">/</span> Code/Lab Design System</div>
+  <div class="brandmark"><span class="mark">
+    <svg class="icon-light" viewBox="0 0 8.00004 10.1608" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00004 0.000235947L5.71904 10.1148H3.35122L5.68747 0.000235947H8.00004Z" fill="#191919"/><path d="M1.09709 10.1608C1.70299 10.1608 2.19418 9.67099 2.19418 9.06673C2.19418 8.46247 1.70299 7.97262 1.09709 7.97262C0.491183 7.97262 0 8.46247 0 9.06673C0 9.67099 0.491183 10.1608 1.09709 10.1608Z" fill="#E60509"/></svg>
+    <svg class="icon-dark" viewBox="0 0 8.00004 10.1608" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00004 0.000235947L5.71904 10.1148H3.35122L5.68747 0.000235947H8.00004Z" fill="white"/><path d="M1.09709 10.1608C1.70299 10.1608 2.19418 9.67099 2.19418 9.06673C2.19418 8.46247 1.70299 7.97262 1.09709 7.97262C0.491183 7.97262 0 8.46247 0 9.06673C0 9.67099 0.491183 10.1608 1.09709 10.1608Z" fill="#E60509"/></svg>
+  </span> Code/Lab Design System</div>
   <div class="search-btn">
     <label for="siteSearch" class="visually-hidden">Search Code/Lab</label>
     <input id="siteSearch" type="search" placeholder="Search Code/Lab" autocomplete="off" enterkeyhint="go">
