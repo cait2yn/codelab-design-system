@@ -31,6 +31,7 @@
 }
 
 *{box-sizing:border-box;}
+html{background:var(--bg); min-height:100%;}
 .visually-hidden{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
 body{background:var(--bg); color:var(--text); font-family:var(--font-sans); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased; transition:background-color 320ms var(--ease);}
 body, body *{transition:background-color 320ms var(--ease), border-color 320ms var(--ease), color 320ms var(--ease), box-shadow 320ms var(--ease);}
@@ -46,6 +47,7 @@ code,.mono{font-family:var(--font-mono);}
 .topbar{
   display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4);
   height:64px; padding:0 var(--sp-6); border-bottom:1px solid var(--border);
+  position:sticky; top:0; z-index:20; background:var(--bg);
 }
 .brandmark{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:500; color:var(--text); white-space:nowrap;}
 .brandmark .mark{width:22px; height:22px; border-radius:5px; background:var(--red-500); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:12px; color:#fff; flex-shrink:0;}
@@ -326,7 +328,7 @@ const scales = {
   "Lime": {stops:{50:"#F6FFF3",100:"#CFFFBB",200:"#9FFA71",300:"#70E505",400:"#62C711",500:"#8AFF41",600:"#3E8208",700:"#37621F",800:"#2F4424",900:"#202A1C",950:"#10130E"}, note:"Context · Open Source"},
   "Orange": {stops:{50:"#FFFBF8",100:"#FFEADB",200:"#FFD5B5",300:"#FEB174",400:"#F38E30",500:"#FF9737",600:"#A45801",700:"#7D450F",800:"#55341A",900:"#332216",950:"#16100B"}, note:"Context · Community"},
   "Magenta": {stops:{50:"#FFFAFF",100:"#FFE5FD",200:"#FECAFB",300:"#FE99FB",400:"#FE57FD",500:"#FF41FF",600:"#B30AB3",700:"#8A0D8B",800:"#5F1B5F",900:"#391738",950:"#1A0C19"}, note:"Highlight / featured tag"},
-  "Neutral": {stops:{50:"#FFFBFA",100:"#F2EDEC",200:"#E2DDDB",300:"#C8C3C2",400:"#AEA9A8",500:"#908B8A",600:"#726D6C",700:"#585453",800:"#403C3B",900:"#292525",950:"#141110"}, note:"Text & surfaces — hue-tinted from red"},
+  "Neutral": {stops:{50:"#FCFCFC",100:"#EEEEEE",200:"#DEDEDE",300:"#C4C4C4",400:"#ABABAB",500:"#8C8C8C",600:"#6F6F6F",700:"#555555",800:"#3D3D3D",900:"#262626",950:"#121212"}, note:"Text & surfaces — true neutral, zero chroma"},
 };
 const sc = document.getElementById('scalesContainer');
 for (const [name,data] of Object.entries(scales)){
