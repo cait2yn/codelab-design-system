@@ -236,11 +236,11 @@ footer ul{list-style:none; margin:0; padding:0; font-size:13px; color:var(--text
 
       <section class="doc-section" id="typography">
         <h2>Typography</h2>
-        <p class="desc">Three families, three jobs: Poppins for display, Inter for interface and body, JetBrains Mono for code and tokens.</p>
+        <p class="desc">Five roles, after Geist's Headings / Buttons / Label / Copy split: Poppins for display and subheadings, Inter for headings and body, JetBrains Mono for code and tokens.</p>
         <div id="typeGroups"></div>
         <div class="callout">
-          <span class="flag">Pairing note</span>
-          Poppins and Inter both classify as sans — rather than swap either, a third technical face (JetBrains Mono) was added for code and labels only, never prose.
+          <span class="flag">Weight rules — enforced, not stylistic preference</span>
+          Inter as a heading is <b>Medium (500) or SemiBold (600) only</b> — never Regular, never Bold or heavier. Poppins Medium (500) is permitted as a subheading, distinct from its SemiBold/Bold/ExtraBold role in Display. Poppins and Inter both classify as sans, so pairing them relies on this weight discipline to read as intentional — a third face (JetBrains Mono) handles code and tokens only, never prose.
         </div>
       </section>
 
@@ -341,21 +341,26 @@ for (const [name,data] of Object.entries(scales)){
   sc.appendChild(row);
 }
 
-/* typography: three real specimen groups, one per family */
+/* typography: five roles after Geist's Headings/Buttons/Label/Copy split — weight is set per row */
+const weightName = {500:'Medium',600:'SemiBold',700:'Bold',800:'ExtraBold',400:'Regular'};
 const typeGroups = [
-  { name:'Poppins', role:'display / brand', family:"'Poppins',sans-serif", weight:700,
-    rows:[["4xl","49px","Code/Lab"],["3xl","39px","Design System"],["xl","25px","Card title"],["base","16px","Nav wordmark size"]] },
-  { name:'Inter', role:'interface / body', family:"'Inter',sans-serif", weight:400,
-    rows:[["2xl","31px","Section subhead"],["lg","20px","Lead paragraph"],["base","16px","Body copy sets the read"],["sm","13px","Caption / meta"]] },
-  { name:'JetBrains Mono', role:'code / tokens', family:"'JetBrains Mono',monospace", weight:400,
-    rows:[["base","16px","--color-red-600"],["sm","13px","oklch(0.54 0.2249 31.69)"],["xs","10px","PRIMITIVE.COLOR.RED.500"]] },
+  { name:'Display', role:'Poppins · brand & hero', family:"'Poppins',sans-serif",
+    rows:[["6xl","76px",800,"Code/Lab"],["5xl","61px",700,"Design System"],["4xl","49px",700,"Foundations"],["3xl","39px",600,"Section heading"]] },
+  { name:'Heading', role:'Inter · Medium or SemiBold only', family:"'Inter',sans-serif",
+    rows:[["2xl","31px",600,"Page title"],["xl","25px",600,"Section subhead"],["lg","20px",500,"Card group title"],["base","16px",500,"Compact heading"]] },
+  { name:'Subheading', role:'Poppins Medium', family:"'Poppins',sans-serif",
+    rows:[["lg","20px",500,"Subheading, large"],["base","16px",500,"Subheading, base"]] },
+  { name:'Copy', role:'Inter · body text', family:"'Inter',sans-serif",
+    rows:[["lg","20px",400,"Lead paragraph"],["base","16px",400,"Body copy sets the read"],["sm","13px",400,"Caption / meta"]] },
+  { name:'Label & Code', role:'JetBrains Mono', family:"'JetBrains Mono',monospace",
+    rows:[["sm","13px",500,"--color-action-primary"],["xs","10px",500,"PRIMITIVE.COLOR.RED.500"]] },
 ];
 const tg = document.getElementById('typeGroups');
 typeGroups.forEach(group=>{
   const wrap = document.createElement('div');
   wrap.className = 'font-group';
-  const rows = group.rows.map(([tag,px,sample])=>
-    `<div class="type-row"><span class="sample" style="font-family:${group.family}; font-weight:${group.weight}; font-size:${px}">${sample}</span><span class="meta">${tag} · ${px}</span></div>`
+  const rows = group.rows.map(([tag,px,weight,sample])=>
+    `<div class="type-row"><span class="sample" style="font-family:${group.family}; font-weight:${weight}; font-size:${px}">${sample}</span><span class="meta">${tag} · ${px} · ${weightName[weight]}</span></div>`
   ).join('');
   wrap.innerHTML = `<div class="font-group-head"><span class="name">${group.name}</span><span class="role">${group.role}</span></div>${rows}`;
   tg.appendChild(wrap);
